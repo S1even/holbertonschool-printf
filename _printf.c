@@ -37,7 +37,7 @@ int _printf(const char *format, ...)
 }
 
 
-int (*get_format_funct(char opt))(va_list)
+int (*get_format_funct(char *opt))(va_list)
 {
 	int i;
 
@@ -45,10 +45,11 @@ int (*get_format_funct(char opt))(va_list)
 		{"c", _printf_char},
 		{"s", _printf_string},
 		{"%", _printf_percent},
+		{NULL, NULL}
 	};
 
-	for (i = 0; i < 3; i++)
-		if (fopt[i].op[0] == opt)
+	for (i = 0; fopt[i].op != NULL; i++)
+		if (fopt[i].op[0] == opt[0] && fopt[i].op[1] == '\0')
 			return (fopt[i].f);
 	return (NULL);
 }
