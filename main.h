@@ -18,7 +18,7 @@ typedef struct format_types
 
 int _putchar(char c);
 int _printf(const char *format, ...);
-int (*get_format_funct(char opt))(va_list);
+int (*get_format_funct(char *opt))(va_list);
 int _printf_string(va_list args);
 int _printf_char(va_list args);
 int _printf_percent(va_list args);
