@@ -1,0 +1,22 @@
+#ifndef MAIN_H
+#define MAIN_H
+
+#include <stdarg.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+/**
+ *
+ */
+
+typedef struct format_types
+{
+	char *op;
+	int (*f)(va_list args);
+} format_types;
+
+int _putchar(char c);
+int _printf(const char *format, ...);
+
+#endif
