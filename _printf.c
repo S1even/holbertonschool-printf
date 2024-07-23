@@ -5,11 +5,12 @@
 
 int _printf(const char *format, ...)
 {
-	int num_char = 0;
-	va_list args;
-	va_start(args, format);
 	char opt[2];
 	int (*formatter)(va_list);
+	int num_char = 0;
+
+	va_list args;
+	va_start(args, format);
 
 	while (*format)
 	{
@@ -18,7 +19,7 @@ int _printf(const char *format, ...)
 			format++;
 			opt[0] = *format;
 			opt[1] = '\0';
-			formatter = get_format_func(opt);
+			formatter = get_format_funct(opt);
 
 			if (formatter)
 				num_char += formatter(args);
