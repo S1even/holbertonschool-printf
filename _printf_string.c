@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stddef.h>
+#include <stdarg.h>
 
 /**
  * _printf_string - print a string of characters
@@ -9,7 +11,7 @@
 int _printf_string(va_list args)
 {
 	int index = 0;
-	char *str = va_arg(args, char*);
+	char *str = va_arg(args, char *);
 
 	if (str == NULL)
 		str = ("null");
