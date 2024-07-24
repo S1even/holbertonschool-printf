@@ -5,56 +5,45 @@
 
 int _printf(const char *format, ...)
 {
-	char opt[2];
-	int (*formatter)(va_list);
-	int num_char = 0, i;
-
+	format_typesfopt = get_format_types();
 	va_list args;
+	int i = 0, j, count = 0;
+	int (f)(va_list);
+
+	if (format == NULL)
+		return (-1);
+
 	va_start(args, format);
 
-	while (format[i])
+	while (format && format[i])
 	{
 		if (format[i] == '%')
 		{
-			format++;
-			opt = format[i];
-			if (format[i] == '\0')
+			i++;
+			for (j = 0; fopt[j].fmt; j++)
 			{
-				va_end(args);
-				return(-1);
+				if ((fopt[j].fmt) == format[i])
+				{
+					f = fopt[j].fn;
+					count += f(args);
+					break;
+				}
 			}
-
-			formatter = get_format_funct(opt);
-
-			if (formatter)
-				num_char += formatter(args);
+			if (fopt[j].fmt == NULL)
+			{
+				_putchar('%');
+				_putchar(format[i]);
+				count += 2;
+			}
 		}
-		
 		else
 		{
-			_putchar(*format);
-			num_char++;
+			_putchar(format[i]);
+			count++;
 		}
-		format++;
+		i++;
 	}
+
 	va_end(args);
-	return (num_char);
-}
-
-
-int (*get_format_funct(char *opt))(va_list)
-{
-	int i;
-
-	format_types fopt[] = {
-		{"c", _printf_char},
-		{"s", _printf_string},
-		{"%", _printf_percent},
-		{NULL, NULL}
-	};
-
-	for (i = 0; fopt[i].op != NULL; i++)
-		if (fopt[i].op[0] == opt[0] && fopt[i].op[1] == '\0')
-			return (fopt[i].f);
-	return (NULL);
+	return count;
 }
