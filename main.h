@@ -7,9 +7,9 @@
  *
  */
 
-typedef struct format_types
+typedef struct format
 {
-	char *types;
+	char *specifier;
 	int (*f)(va_list args);
 } format_types;
 
@@ -19,5 +19,6 @@ int _printf_char(va_list args);
 int _printf_string(va_list args);
 int _printf_percent(va_list args);
 int _printf_integer(va_list args);
+void print_number(int n, int *printed_chars);
 
 #endif

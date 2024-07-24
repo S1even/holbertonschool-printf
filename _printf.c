@@ -3,47 +3,51 @@
 /**
  */
 
+format_t ftypes[] = {
+	{"c", _printf_char},
+	{"s", _printf_string},
+	{"i", _printf_integer},
+	{"d", _printf_integer},
+	{"%", _print_perc},
+	{NULL, NULL}
+};
+
 int _printf(const char *format, ...)
 {
-	format_typesfopt = get_format_types();
 	va_list args;
-	int i = 0, j, count = 0;
-	int (f)(va_list);
-
-	if (format == NULL)
-		return (-1);
+	int printed_chars = 0;
+	const char *ptr;
+	int i;
 
 	va_start(args, format);
 
-	while (format && format[i])
+	for (ptr = format; *ptr != '\0'; ptr++)
 	{
-		if (format[i] == '%')
+		if (*ptr == '%')
 		{
-			i++;
-			for (j = 0; fopt[j].fmt; j++)
+			ptr++;
+			for (i = 0; ftypes[i].specifier != NULL; i++)
 			{
-				if ((fopt[j].fmt) == format[i])
+				if (*(ftypes[i].specifier) == *ptr)
 				{
-					f = fopt[j].fn;
-					count += f(args);
+					printed_chars += ftypes[i].f(args);
 					break;
 				}
 			}
-			if (fopt[j].fmt == NULL)
+			if (ftypes[i].specifier == NULL)
 			{
 				_putchar('%');
-				_putchar(format[i]);
-				count += 2;
+				_putchar(*ptr);
+				printed_chars += 2;
 			}
 		}
 		else
 		{
-			_putchar(format[i]);
-			count++;
+			_putchar(*ptr);
+			printed_chars++;
 		}
-		i++;
 	}
+	va_ends(args);
 
-	va_end(args);
-	return count;
+	return (printed_chars);
 }
