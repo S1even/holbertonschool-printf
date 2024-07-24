@@ -2,6 +2,11 @@
 #define MAIN_H
 #include <stdarg.h>
 
+/**
+ * struct format_types - struct format
+ * @op: Character to recognize the format
+ * @f: function to execute a print
+ */
 
 typedef struct format_types
 {
