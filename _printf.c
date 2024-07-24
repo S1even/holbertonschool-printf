@@ -3,8 +3,10 @@
 #include <stdarg.h>
 
 /**
-*
-*/
+ * _printf - clone of printf
+ * @format: character string
+ * Returns: the number of characters printed
+ */
 
 int _printf(const char *format, ...)
 {
@@ -48,6 +50,11 @@ int _printf(const char *format, ...)
 	return (number);
 }
 
+/**
+ * get_format_function - function to return the function format
+ * @opt2: option to check
+ * Return: fonction or null
+ */
 
 int (*get_format_function(char opt2))(va_list)
 {
