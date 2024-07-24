@@ -7,18 +7,23 @@ int _printf(const char *format, ...)
 {
 	char opt[2];
 	int (*formatter)(va_list);
-	int num_char = 0;
+	int num_char = 0, i;
 
 	va_list args;
 	va_start(args, format);
 
-	while (*format)
+	while (format[i])
 	{
-		if (*format == '%')
+		if (format[i] == '%')
 		{
 			format++;
-			opt[0] = *format;
-			opt[1] = '\0';
+			opt = format[i];
+			if (format[i] == '\0')
+			{
+				va_end(args);
+				return(-1);
+			}
+
 			formatter = get_format_funct(opt);
 
 			if (formatter)
