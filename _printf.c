@@ -5,7 +5,7 @@
 /**
  * _printf - clone of printf
  * @format: character string
- * Returns: the number of characters printed
+ * Return: the number of characters printed
  */
 
 int _printf(const char *format, ...)
