@@ -1,53 +1,71 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdarg.h>
 
 /**
- */
-
-format_t ftypes[] = {
-	{"c", _printf_char},
-	{"s", _printf_string},
-	{"i", _printf_integer},
-	{"d", _printf_integer},
-	{"%", _print_perc},
-	{NULL, NULL}
-};
+*
+*/
 
 int _printf(const char *format, ...)
 {
+	int i = 0, j, number = 0;
+	char opt1, opt2;
 	va_list args;
-	int printed_chars = 0;
-	const char *ptr;
-	int i;
 
 	va_start(args, format);
-
-	for (ptr = format; *ptr != '\0'; ptr++)
+	while (format[i] != '\0')
 	{
-		if (*ptr == '%')
+		int print = 0;
+		int (*f)(va_list args);
+
+		opt1 = format[i];
+		j = 1;
+
+		if (opt1 == '%')
 		{
-			ptr++;
-			for (i = 0; ftypes[i].specifier != NULL; i++)
+			opt2 = format[i + 1];
+			if (opt2 == '\0')
 			{
-				if (*(ftypes[i].specifier) == *ptr)
-				{
-					printed_chars += ftypes[i].f(args);
-					break;
-				}
+				va_end(args);
+				return (-1);
 			}
-			if (ftypes[i].specifier == NULL)
+			f = get_format_function(opt2);
+			if (f)
 			{
-				_putchar('%');
-				_putchar(*ptr);
-				printed_chars += 2;
+				number += f(args);
+				j = 2;
+				print = 1;
 			}
 		}
-		else
+		if (print == 0)
 		{
-			_putchar(*ptr);
-			printed_chars++;
+			number += 1;
+			_putchar(opt1);
+		}
+		i += j;
+	}
+	va_end(args);
+	return (number);
+}
+
+
+int (*get_format_function(char opt2))(va_list)
+{
+	int index;
+	format_t ftypes[] = {
+		{"c", _printf_char},
+		{"s", _printf_string},
+		{"i", _printf_integer},
+		{"d", _printf_integer},
+		{"%", _printf_percent},
+	};
+
+	for (index = 0; index < 5; index++)
+	{
+		if (ftypes[index].op[0] == opt2)
+		{
+			return (ftypes[index].f);
 		}
 	}
-	va_ends(args);
-
-	return (printed_chars);
+	return (NULL);
 }
