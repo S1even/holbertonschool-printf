@@ -1,35 +1,41 @@
+#include <stdio.h>
+#include <stdarg.h>
 #include "main.h"
 
-/**
- * _printf_integer - prints an integer
- * @n: integer to print
- * Return: number of characters printed
- */
-
-int _printf_integer(int n)
+int _printf_integer(va_list args)
 {
-	unsigned int num;
+	int nb = va_arg(args, int);
 	int count = 0;
 
-	if (n < 0)
+	if (!nb)
 	{
-		_putchar('-');
+		_putchar('0');
 		count++;
-		num = -n;
 	}
-
 	else
 	{
-		num = n;
+		if (nb < 0)
+		{
+			_putchar('-');
+			nb = _abs(nb);
+			count++;
+		}
+		count += __printf_integer(nb, 0);
 	}
+	return (count);
 
-	if (num / 10)
-	{
-		count += _printf_integer(num / 10);
-	}
+}
 
-	_putchar((num % 10) + '0');
-	count++;
+int __printf_integer(int nb, int count)
+{
+	if (nb <= 0)
+		return (count);
+	count = __printf_integer(nb / 10, count + 1);
+	_putchar((nb % 10) + '0');
+	return (count);
+}
 
-	return (count)
+int _abs(int c)
+{
+	return (c * ((c > 0) - (c < 0)));
 }
