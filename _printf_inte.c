@@ -10,51 +10,39 @@
 
 int _printf_integer(va_list args)
 {
-	int nb = va_arg(args, int);
-	int count = 0;
+	int count = 0, i, j;
+	int number = va_arg(args, int);
+	char buffer[64];
+	unsigned int n;
 
-	if (!nb)
+	if (!number)
 	{
 		_putchar('0');
+		return (1);
+	}
+
+	if (number < 0)
+	{
+		_putchar('-');
+		n = -number;
 		count++;
 	}
+
 	else
+		n = number;
+
+	i = 0;
+	while (n != 0)
 	{
-		if (nb < 0)
-		{
-			_putchar('-');
-			nb = _abs(nb);
-			count++;
-		}
-		count += __printf_integer(nb, 0);
+		buffer[i++] = (n % 10) + '0';
+		n /= 10;
 	}
+
+	for (j = i - 1; j >= 0; j--)
+	{
+		_putchar(buffer[j]);
+		count++;
+	}
+
 	return (count);
-
-}
-
-/**
- * __printf_integer - recursion of the 1st function
- * @nb: the number
- * @count: number of count
- * Return: count
-*/
-
-int __printf_integer(int nb, int count)
-{
-	if (nb <= 0)
-		return (count);
-	count = __printf_integer(nb / 10, count + 1);
-	_putchar((nb % 10) + '0');
-	return (count);
-}
-
-/**
- * _abs - Convert integer to absolute value
- * @c: The character to convert
- * Return: int result absolute
- */
-
-int _abs(int c)
-{
-	return (c * ((c > 0) - (c < 0)));
 }
