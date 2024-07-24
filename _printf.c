@@ -3,7 +3,7 @@
 #include <stdarg.h>
 
 /**
- * _printf - clone of printf
+ * _printf - clone of printf.
  * @format: character string
  * Return: the number of characters printed
  */
