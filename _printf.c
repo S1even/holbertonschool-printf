@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _printf - clone of printf.
+ * _printf - clone of printf
  * @format: character string
  * Return: the number of characters printed
  */
@@ -22,7 +22,7 @@ int _printf(const char *format, ...)
 
 		if (format[index] != '%')
 		{
-			write(1, &format[index], 1);
+			_putchar(format[index]);
 			strFormat_leng++;
 		}
 
