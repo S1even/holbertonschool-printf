@@ -38,7 +38,7 @@ returns the number of characters printed (except the null character).
 .TP
 _printf("Hello, %s!\n", "everyone");		/* Print: Hello, everyone */
 .TP
-_printf("Number: %d\n", 24);			/* print: Number: 42 */
+_printf("Number: %d\n", 24);			/* print: Number: 24 */
 
 .SH AUTHOR
 .B DEVIN
