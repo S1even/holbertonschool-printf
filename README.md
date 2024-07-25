@@ -37,14 +37,64 @@ The header files : Main.h
 Allowed editors  : vi, vim, emacs
 
 ```
-## Flowchart
 
 ## The examples
+
+### String
+```
+#include "main.h"
+
+int main(void)
+{
+      _printf("Hello, %s!\n", "everyone")
+      return (0)
+}
+```
+`output`
+```
+Hello, everyone
+```
+
+### Integer
+```
+#include "main.h"
+
+int main(void)
+{
+      _printf("Number: %d\n", 24)
+      return (0)
+}
+```
+`output`
+```
+Number: 24
+```
+### Character
+```
+#include "main.h"
+
+int main(void)
+{
+      _printf("The character is: %c\n", 'A')
+      return (0)
+}
+```
+`Output`
+```
+The character is: A
+```
+
+
+
+
+## Flowchart
+![images (1)](https://github.com/user-attachments/assets/9f40a5ed-d97f-4379-8904-df29bd00bb87)
+
 
 ## Man page
 You can check the  [Man page](https://github.com/S1even/holbertonschool-printf/blob/main/man_3_printf) of the function here.
 
 ## Authors
 
-- [S1even](https://github.com/S1even)
-- [Bruqui](https://github.com/Bruqui)
+- [Steven](https://github.com/S1even)
+- [Dylan](https://github.com/Bruqui)
