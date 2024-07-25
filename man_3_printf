@@ -1,1 +1,46 @@
-Work in progress ! 
+.TH _printf 1
+
+.SH NAME
+_printf \- formatted output conversion.
+
+.SH SYNOPSIS
+.B #include "main.h"
+
+.B int _printf(const char *format, ...)
+
+.SH DESCRIPTION
+.B _printf
+- produces formatted output to stdout. This function is a clone to the standart printf function from the C library.
+
+.SH OPTIONS
+.TP
+.BR %c
+displays a character.
+.TP
+.BR %s
+displays a character string.
+.TP
+.BR %%
+displays a '%' character.
+.TP
+.BR %d
+displays a signed integer.
+.TP
+.BR %i
+displays a signed integer (same as "%d").
+
+.SH RETURN VALUE
+.B _printf:
+returns the number of characters printed (except the null character).
+
+.SH EXAMPLES
+
+_printf("Hello, %s!\n", "everyone");		/* Print: Hello, everyone */
+_printf("Number: %d\n", 24);			/* print: Number: 42 */
+
+.SH AUTHOR
+.B DEVIN
+Steven
+
+.B GROS DESORMEAUX
+Dylan
